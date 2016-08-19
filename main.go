@@ -88,12 +88,16 @@ func main() {
 	router.Static("/static", "static")
 
 	router.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.tmpl.html", nil)
+		// c.HTML(http.StatusOK, "index.tmpl.html", nil)
+		c.JSON(200, gin.H{
+			"name":    "kmk-api",
+			"version": "v0.1.0",
+		})
 	})
 
-	router.GET("/info", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.tmpl.html", nil)
-	})
+	// router.GET("/info", func(c *gin.Context) {
+	// 	c.HTML(http.StatusOK, "index.tmpl.html", nil)
+	// })
 
 	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
@@ -101,17 +105,26 @@ func main() {
 		})
 	})
 
-	router.GET("/user/:name", func(c *gin.Context) {
+	router.GET("/todos/:user", func(c *gin.Context) {
 		name := c.Param("name")
 		c.String(http.StatusOK, "Hello %s", name)
 	})
 
-	router.GET("/md", func(c *gin.Context) {
-		c.String(http.StatusOK, string(blackfriday.MarkdownBasic([]byte("**hi!**"))))
+	router.GET("/todos/:user/:id", func(c *gin.Context) {
+		name := c.Param("name")
+		id   := c.Param("id")
+		c.JSON(200, gin.H{
+			"name": name,
+			"id":   id,
+		})
 	})
 
-	router.GET("/yo", repeatHandler)
-	router.GET("/db", dbFunc)
+	// router.GET("/md", func(c *gin.Context) {
+	// 	c.String(http.StatusOK, string(blackfriday.MarkdownBasic([]byte("**hi!**"))))
+	// })
+
+	// router.GET("/yo", repeatHandler)
+	// router.GET("/db", dbFunc)
 
 	router.Run(":" + port)
 }
