@@ -1,11 +1,11 @@
 package main
 
 import (
-	"bytes"
 	"log"
 	"net/http"
 	"os"
 	"strconv"
+	"bytes"
 
 	"github.com/gin-gonic/gin"
 	"github.com/russross/blackfriday"
@@ -45,6 +45,21 @@ func main() {
 
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.tmpl.html", nil)
+	})
+
+	router.GET("/info", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.tmpl.html", nil)
+	})
+
+	router.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
+
+	router.GET("/user/:name", func(c *gin.Context) {
+		name := c.Param("name")
+		c.String(http.StatusOK, "Hello %s", name)
 	})
 
 	router.GET("/md", func(c *gin.Context) {
