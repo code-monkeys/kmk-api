@@ -77,10 +77,10 @@ func main() {
 	}
 
 
-    db, err = sql.Open("postgres", os.Getenv("DATABASE_URL"))
-    if err != nil {
-        log.Fatalf("Error opening database: %q", err)
-    }
+	db, err = sql.Open("postgres", os.Getenv("DATABASE_URL"))
+	if err != nil {
+		log.Fatalf("Error opening database: %q", err)
+	}
 
 	router := gin.New()
 	router.Use(gin.Logger())
