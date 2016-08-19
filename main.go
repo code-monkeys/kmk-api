@@ -40,7 +40,7 @@ func main() {
 		c.String(http.StatusOK, "Hello %s", name)
 	})
 
-	router.GET("/mark", func(c *gin.Context) {
+	router.GET("/md", func(c *gin.Context) {
 		c.String(http.StatusOK, string(blackfriday.MarkdownBasic([]byte("**hi!**"))))
 	})
 
