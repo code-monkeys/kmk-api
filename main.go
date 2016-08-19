@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/russross/blackfriday"
 )
 
 func main() {
@@ -37,6 +38,10 @@ func main() {
 	router.GET("/user/:name", func(c *gin.Context) {
 		name := c.Param("name")
 		c.String(http.StatusOK, "Hello %s", name)
+	})
+
+	router.GET("/mark", func(c *gin.Context) {
+		c.String(http.StatusOK, string(blackfriday.MarkdownBasic([]byte("**hi!**"))))
 	})
 
 	router.Run(":" + port)
