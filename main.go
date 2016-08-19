@@ -106,15 +106,15 @@ func main() {
 	})
 
 	router.GET("/todos/:user", func(c *gin.Context) {
-		name := c.Param("name")
-		c.String(http.StatusOK, "Hello %s", name)
+		user := c.Param("user")
+		c.String(http.StatusOK, "Hello %s", user)
 	})
 
 	router.GET("/todos/:user/:id", func(c *gin.Context) {
-		name := c.Param("name")
+		user := c.Param("user")
 		id   := c.Param("id")
 		c.JSON(200, gin.H{
-			"name": name,
+			"user": user,
 			"id":   id,
 		})
 	})
