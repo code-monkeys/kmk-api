@@ -11,7 +11,7 @@ import (
 	"database/sql"
 
 	"github.com/gin-gonic/gin"
-	"github.com/russross/blackfriday"
+	// "github.com/russross/blackfriday"
 	_ "github.com/lib/pq"
 )
 
