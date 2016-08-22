@@ -128,7 +128,7 @@ func main() {
         c.JSON(200, gin.H{
             "name":    "kmk-api",
             "version": "v0.1.0--",
-            "json": string(json),
+            "json": json,
         })
     })
 
