@@ -131,11 +131,11 @@ func main() {
         c.JSON(200, gin.H{
             "name":    "kmk-api",
             "version": "v0.1.0--",
-            // "list": (string) lost,
-            "bool": (bool) bool,
-            "int" : (int) int1,
-            "float" : (float) flot,
-            "str" :  (string) str,
+            "list":  string(lost),
+            "bool":  string(bool),
+            "int" :  string(int1),
+            "float": string(flot),
+            "str" :  string(str),
         })
     })
 
