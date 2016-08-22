@@ -122,7 +122,7 @@ func main() {
     router.GET("/", func(c *gin.Context) {
         // c.HTML(http.StatusOK, "index.tmpl.html", nil)
         data := []string{"apple", "peach", "pear"}
-        list, _ := json.Marshal(data)
+        lost, _ := json.Marshal(data)
         bool, _ := json.Marshal(true)
         int1, _ := json.Marshal(123)
         flot, _ := json.Marshal(123.456)
@@ -131,7 +131,7 @@ func main() {
         c.JSON(200, gin.H{
             "name":    "kmk-api",
             "version": "v0.1.0--",
-            "list": (string) list,
+            "list": (string) lost,
             "bool": (bool) bool,
             "int" : (int) int1,
             "float" : (float) flot,
