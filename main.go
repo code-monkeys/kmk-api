@@ -10,6 +10,7 @@ import (
     "time"
     "database/sql"
     "encoding/json"
+    "reflect"
 
     "github.com/gin-gonic/gin"
     _ "github.com/lib/pq"
@@ -37,13 +38,17 @@ type Todos struct {
 
 // }
 
-
-
 func dumpTable(table string) []byte {
-    rows, err := Query(db, fmt.Sprintf("SELECT * FROM %s", table))
-    checkError(err)
+    query := fmt.Sprintf("SELECT * FROM %s", table)
+    rows, err := db.Query(query)
+    if err != nil {
+        log.Fatal(err)
+    }
+
     columns, err := rows.Columns()
-    checkError(err)
+    if err != nil {
+        log.Fatal(err)
+    }
 
     scanArgs := make([]interface{}, len(columns))
     values   := make([]interface{}, len(columns))
@@ -52,9 +57,13 @@ func dumpTable(table string) []byte {
         scanArgs[i] = &values[i]
     }
 
+    var s []byte
+
     for rows.Next() {
         err = rows.Scan(scanArgs...)
-        checkError(err)
+        if err != nil {
+            log.Fatal(err)
+        }
 
         record := make(map[string]interface{})
 
@@ -64,7 +73,7 @@ func dumpTable(table string) []byte {
 
                 switch t := col.(type) {
                 default:
-                    fmt.Printf("Unexpected type %T\n", t)
+                    fmt.Println("Unexpected type %T", t)
                 case bool:
                     fmt.Printf("bool\n")
                     record[columns[i]] = col.(bool)
@@ -92,6 +101,7 @@ func dumpTable(table string) []byte {
         s, _ := json.Marshal(record)
         return s
     }
+    return s
 }
 
 func repeatHandler(c *gin.Context) {
@@ -201,11 +211,11 @@ func main() {
     // })
 
     router.GET("/dump", func(c *gin.Context) {
-        b := dumpTable("todos")
-        c.String(http.StatusOK, s)
+        s := dumpTable("ticks")
+        c.String(http.StatusOK, string(s))
     })
 
-    router.GET("/ping", func(c *gin.Context) {
+        router.GET("/ping", func(c *gin.Context) {
         c.JSON(200, gin.H{
             "message": "pong",
         })
