@@ -1,6 +1,6 @@
 {
   "name": "kmk-api",
-  "description": "Run the KMK API on Heroku",
+  "description": "Run the KMK API for waste managment",
   "keywords": [
     "kmk",
     "go",
