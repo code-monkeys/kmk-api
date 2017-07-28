@@ -9,8 +9,8 @@ This application supports the [Getting Started with Go on Heroku](https://devcen
 Make sure you have [Go](http://golang.org/doc/install) and the [Heroku Toolbelt](https://toolbelt.heroku.com/) installed.
 
 ```sh
-$ go get -u github.com/ptdorf/kmk-api
-$ cd $GOPATH/src/github.com/ptdorf/kmk-api
+$ go get -u github.com/dotser/kmk-api
+$ cd $GOPATH/src/github.com/dotser/kmk-api
 $ heroku local
 ```
 
@@ -21,7 +21,7 @@ You should also install [Godep](https://github.com/tools/godep) if you are going
 ## Deploying to Heroku
 
 ```sh
-$ heroku create
+$ heroku create kmk-api --region eu
 $ git push heroku master
 $ heroku open
 ```
