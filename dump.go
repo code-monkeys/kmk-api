@@ -1,3 +1,4 @@
+package main
 // http://stackoverflow.com/questions/19991541/dumping-mysql-tables-to-json-with-golang
 
 import (
